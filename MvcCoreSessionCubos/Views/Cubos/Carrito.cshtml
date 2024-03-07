@@ -1,0 +1,52 @@
+﻿@model List<Cubo>
+
+<a asp-controller="Cubos" asp-action="Index"
+   class="btn btn-secondary w-25 my-3">
+    Volver a Cubos
+</a>
+
+@if (Model == null)
+{
+    <h2 class="text-danger">No hay cubos en tu carrito</h2>
+}
+else
+{
+    <h3 class="text-primary mt-3">Cubos en carrito: @Model.Count()</h3>
+    <h3 class="text-success mt-2">Precio total: @Model.Sum(c => c.Precio)€</h3>
+
+    <table class="table table-borderless mt-4">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Precio</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Cubo cubo in Model)
+            {
+                <tr>
+                    <td><img src="@cubo.Imagen" width="50" height="50" /></td>
+                    <td>@cubo.Nombre</td>
+                    <td>@cubo.Marca</td>
+                    <td>@cubo.Modelo</td>
+                    <td>@cubo.Precio</td>
+                    <td>
+                        <a asp-controller="Cubos" asp-action="EliminarCuboCarrito"
+                           asp-route-idcubo="@cubo.IdCubo" class="btn btn-danger w-100">
+                            Eliminar del carrito
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    <a asp-controller="Cubos" asp-action="RealizarCompra"
+       class="btn btn-success w-100 mt-3">
+        Realizar compra
+    </a>
+}
