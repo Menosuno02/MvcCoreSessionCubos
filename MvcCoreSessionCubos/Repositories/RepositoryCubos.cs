@@ -38,7 +38,7 @@ namespace MvcCoreSessionCubos.Repositories
             List<Cubo> listCubos = await GetCubosSessionAsync(cubos);
             int idCompra = await GetMaxIdCompra();
             List<Compra> compras = new List<Compra>();
-            foreach (Cubo cubo in listCubos)
+            foreach(Cubo cubo in listCubos)
             {
                 Compra compra = new Compra
                 {

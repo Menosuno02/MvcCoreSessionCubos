@@ -10,5 +10,11 @@ namespace MvcCoreSessionCubos.Context
 
         public DbSet<Cubo> Cubos { get; set; }
         public DbSet<Compra> Compras { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Compra>()
+                .HasKey(pc => new { pc.IdCompra, pc.NombreCubo });
+        }
     }
 }
